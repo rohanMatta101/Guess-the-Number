@@ -43,7 +43,7 @@ export default function App() {
   }
   return (
     <View style={styles.main}>
-      <Header title="Guess The Number"/>
+      <Header title="Guess The Number!"/>
       {content}
     </View>
   );
