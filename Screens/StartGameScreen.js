@@ -1,5 +1,5 @@
 import React,{ useState } from 'react';
-import {View,Text,StyleSheet,TextInput,Button,TouchableWithoutFeedback, Keyboard,Alert } from 'react-native';
+import {View,Text,StyleSheet,TextInput,Button,TouchableWithoutFeedback, Keyboard,Alert,Dimensions,KeyboardAvoidingView, ScrollView } from 'react-native';
 import BodyText from '../Components/BodyText';
 //import { useState } from 'react';
 
@@ -31,7 +31,14 @@ const StartScreen=props=>{
     {
         confirmedval=<View style={styles.numSelected}><Text style={{fontSize:20}}>Selected Number : {selectedNumber}</Text><Button title="Start Game" onPress={ ()=> props.onStartGame(selectedNumber) }/></View>
     }
+    /*if(Dimensions.get('window').width > 500)
+    {
+        console.log('this way we can divide our view for different device sizes to render it differently')
+    }
+    else{*/
     return(
+        <ScrollView>
+            <KeyboardAvoidingView>
         <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()} >
         <View style={styles.screen}>
             <Text style={styles.title}>Start the Game</Text>
@@ -46,13 +53,15 @@ const StartScreen=props=>{
                 value={enteredValue}  
                 />
                 <View style={styles.Buttons}>
-                <Button title="Reset" onPress={resetInputHandler}/>
+                <Button  title="Reset" onPress={resetInputHandler}/>
                 <Button title="Confirm" onPress={confirmInputHandler}/>
                </View>
             </View>
             {confirmedval}
         </View>
         </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+        </ScrollView>
     )
 }
 const styles=StyleSheet.create({
@@ -79,10 +88,11 @@ const styles=StyleSheet.create({
       borderRadius:10
     },
     Buttons:{
-        width:"100%",
-      flexDirection:"row",
-      justifyContent:"space-between",
-      paddingHorizontal:30
+        width:200,
+        flexDirection:"row",
+        justifyContent:"space-between",
+        marginLeft:20,
+        padding:20
     },
     TextInput:{
         marginTop:10,
